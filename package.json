@@ -1,0 +1,29 @@
+{
+  "name": "create-countdown",
+  "version": "1.0.0",
+  "description": "Create a count down timer with a count down listener every second",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/raghavgujjar/createTimer.git"
+  },
+  "keywords": [
+    "timer",
+    "count",
+    "down"
+  ],
+  "author": "raghavgujjar",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/raghavgujjar/createTimer/issues"
+  },
+  "homepage": "https://github.com/raghavgujjar/createTimer#readme",
+  "devDependencies": {
+    "@babel/preset-env": "^7.18.6",
+    "jest": "^28.1.2"
+  }
+}
