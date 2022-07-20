@@ -26,11 +26,12 @@ const createTimer = (
 ) => {
   let limit = h * 60 * 60 + m * 60 + s;
   let start = 0;
+  let interval;
 
   return {
     start: () => {
       listen(convert(limit - start));
-      let interval = setInterval(() => {
+      interval = setInterval(() => {
         start += 1;
         listen(convert(limit - start));
         if (start === limit) {
@@ -38,6 +39,14 @@ const createTimer = (
           clearInterval(interval);
         }
       }, 1000);
+    },
+    reset: () => {
+      start = 0;
+      listen(convert(limit - start));
+      clearInterval(interval);
+    },
+    stop: () => {
+      clearInterval(interval);
     },
   };
 };

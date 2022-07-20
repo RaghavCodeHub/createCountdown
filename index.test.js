@@ -50,4 +50,44 @@ describe('Create Timer', () => {
     `);
     expect(doneCallback).not.toHaveBeenCalled();
   });
+
+  it('calls clearInterval after initiating stop', () => {
+    const listenCallback = jest.fn();
+    const doneCallback = jest.fn();
+    clearInterval = jest.fn();
+    const timer = createTimer({ h: 1, m: 30, s: 0 }, {
+      listen: listenCallback,
+      done: doneCallback
+    });
+    timer.start();
+    jest.advanceTimersByTime(1000);
+    timer.stop();
+    expect(clearInterval).toHaveBeenCalled();
+    expect(listenCallback).toHaveBeenCalledTimes(2);
+  });
+
+  it('calls clearInterval and listen after initiating reset', () => {
+    const listenCallback = jest.fn();
+    const doneCallback = jest.fn();
+    clearInterval = jest.fn();
+    const timer = createTimer({ h: 1, m: 30, s: 0 }, {
+      listen: listenCallback,
+      done: doneCallback
+    });
+    timer.start();
+    jest.advanceTimersByTime(1000);
+    timer.reset();
+    expect(clearInterval).toHaveBeenCalled();
+    expect(listenCallback).toHaveBeenCalledTimes(3);
+    expect(listenCallback.mock.calls[2][0]).toMatchInlineSnapshot(`
+    Object {
+      "h": 1,
+      "hh": "01",
+      "m": 30,
+      "mm": "30",
+      "s": 0,
+      "ss": "00",
+    }
+    `);
+  });
 });

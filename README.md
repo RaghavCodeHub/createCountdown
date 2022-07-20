@@ -3,7 +3,7 @@ Create a count down timer with a count down listener every second.
 
 ## Specification
 ```javascript
-createCountdown(inputOptions[,callBackOptions])
+createCountdown(inputOptions[,callbackOptions])
 ```
 * `inputOptions` `<Object>` Specify the time limit for the count down
     * `h` `<Number>` Time limit in hours
@@ -21,6 +21,8 @@ createCountdown(inputOptions[,callBackOptions])
     * `done` `<Function>` Called when the count down completes
 * Returns: `<Object>`
     * `start` `<Function>` Starts the count down on timer
+    * `stop` `<Function>` Stops the count down on the timer
+    * `reset` `<Function>` Resets the count down on the timer
 
 ## Description
 This module exports a single function that can used to set a timer, start the timer and listen to the remaining time in the count down every second. The listener is helpful in displaying the remaining time in any format that is desired. The remaining time is always split between hours, minutes and seconds. It doesn't have the consolidated time in seconds or minutes.
@@ -60,5 +62,46 @@ timer.start();
 1:30:00
 1:29:59
 ...
+*/
+```
+* Reset the timer
+```javascript
+const timer = createCountdown({
+  h: 1,
+  m: 30,
+  s: 0  
+}, {
+  listen: ({hh, mm, ss}) => {
+    console.log(`${hh}:${mm}:${ss}`)
+  }
+});
+timer.start();
+setTimeout(() => {
+  timer.reset();
+}, 1000);
+/*
+01:30:00
+01:29:59
+01:30:00
+*/
+```
+* Stop the timer
+```javascript
+const timer = createCountdown({
+  h: 1,
+  m: 30,
+  s: 0  
+}, {
+  listen: ({hh, mm, ss}) => {
+    console.log(`${hh}:${mm}:${ss}`)
+  }
+});
+timer.start();
+setTimeout(() => {
+  timer.stop();
+}, 1000);
+/*
+01:30:00
+01:29:59
 */
 ```
