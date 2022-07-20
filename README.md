@@ -9,7 +9,7 @@ createCountdown(inputOptions[,callbackOptions])
     * `h` `<Number>` Time limit in hours
     * `m` `<Number>` Time limit in minutes
     * `s` `<Number>` Time limit in seconds
-* `callBackOptions` `<Object>`
+* `callbackOptions` `<Object>`
     * `listen` `<Function`> Listens every second of the count down
         * `countdown` `<Object>` Remaining time in the count down
             * `h` `<Number>` Remaining time in hours
