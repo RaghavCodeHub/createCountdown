@@ -28,7 +28,7 @@ createCountdown(inputOptions[,callbackOptions])
 ## Description
 This module exports a single function that can used to set a timer, start the timer and listen to the remaining time in the count down every second. The listener is helpful in displaying the remaining time in any format that is desired. The remaining time is always split between hours, minutes and seconds. It doesn't have the consolidated time in seconds or minutes.
 
-## Example
+## Examples
 * Create a timer for 90 minutes
 ```javascript
 const timer = createCountdown({
