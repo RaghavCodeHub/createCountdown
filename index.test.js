@@ -1,17 +1,32 @@
-import createTimer from ".";
+'use strict';
+
+import createCountdown from ".";
 
 describe('Create Timer', () => {
   beforeAll(() => {
     jest.useFakeTimers();
   });
   afterAll(() => {
-    jest.clearAllTimers()
+    jest.clearAllTimers();
+  });
+
+  it('counts down to time set by set method', () => {
+    const listenCallback = jest.fn();
+    const doneCallback = jest.fn();
+    const timer = createCountdown({ h: 1, m: 30, s: 0 }, {
+      listen: listenCallback,
+      done: doneCallback
+    });
+    timer.set({ h: 0, m: 0, s: 30});
+    timer.start();
+    jest.runAllTimers();
+    expect(listenCallback).toHaveBeenCalledTimes(31);
   });
 
   it('calls listen and done after count down is complete', () => {
     const listenCallback = jest.fn();
     const doneCallback = jest.fn();
-    const timer = createTimer({ h: 1, m: 30, s: 0 }, {
+    const timer = createCountdown({ h: 1, m: 30, s: 0 }, {
       listen: listenCallback,
       done: doneCallback
     });
@@ -31,7 +46,7 @@ describe('Create Timer', () => {
   it('calls listen after one second countdown', () => {
     const listenCallback = jest.fn();
     const doneCallback = jest.fn();
-    const timer = createTimer({ h: 1, m: 30, s: 0 }, {
+    const timer = createCountdown({ h: 1, m: 30, s: 0 }, {
       listen: listenCallback,
       done: doneCallback
     });
@@ -55,7 +70,7 @@ describe('Create Timer', () => {
     const listenCallback = jest.fn();
     const doneCallback = jest.fn();
     clearInterval = jest.fn();
-    const timer = createTimer({ h: 1, m: 30, s: 0 }, {
+    const timer = createCountdown({ h: 1, m: 30, s: 0 }, {
       listen: listenCallback,
       done: doneCallback
     });
@@ -70,7 +85,7 @@ describe('Create Timer', () => {
     const listenCallback = jest.fn();
     const doneCallback = jest.fn();
     clearInterval = jest.fn();
-    const timer = createTimer({ h: 1, m: 30, s: 0 }, {
+    const timer = createCountdown({ h: 1, m: 30, s: 0 }, {
       listen: listenCallback,
       done: doneCallback
     });

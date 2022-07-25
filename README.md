@@ -23,12 +23,13 @@ createCountdown(inputOptions[,callbackOptions])
     * `start` `<Function>` Starts the count down on timer
     * `stop` `<Function>` Stops the count down on the timer
     * `reset` `<Function>` Resets the count down on the timer
+    * `set` `<Function>` Sets the count down on the timer
 
 ## Description
 This module exports a single function that can used to set a timer, start the timer and listen to the remaining time in the count down every second. The listener is helpful in displaying the remaining time in any format that is desired. The remaining time is always split between hours, minutes and seconds. It doesn't have the consolidated time in seconds or minutes.
 
 ## Example
-* Set a timer for 90 minutes
+* Create a timer for 90 minutes
 ```javascript
 const timer = createCountdown({
   h: 1,
@@ -103,5 +104,23 @@ setTimeout(() => {
 /*
 01:30:00
 01:29:59
+*/
+```
+* Set a timer for 30 seconds
+```javascript
+const timer = createCountdown({}, {
+  listen: ({hh, mm, ss}) => {
+    console.log(`${hh}:${mm}:${ss}`)
+  }
+});
+timer.set({
+  h: 0, 
+  m: 0,
+  s: 30,
+});
+timer.start();
+/*
+00:00:30
+00:00:29
 */
 ```

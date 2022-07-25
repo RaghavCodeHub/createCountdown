@@ -20,13 +20,16 @@ const convert = (time) => {
   };
 };
 
-const createTimer = (
-  { h = 0, m = 0, s = 0 },
-  { listen = () => { }, done = () => { } }
-) => {
-  let limit = h * 60 * 60 + m * 60 + s;
+const createCountdown = ({ h, m, s } = {}, { listen = () => { }, done = () => { } }) => {
+  let limit = 0;
   let start = 0;
   let interval;
+
+  const set = ({ h = 0, m = 0, s = 0 }) => {
+    limit = h * 60 * 60 + m * 60 + s;
+  };
+
+  set({ h, m, s });
 
   return {
     start: () => {
@@ -48,7 +51,8 @@ const createTimer = (
     stop: () => {
       clearInterval(interval);
     },
+    set,
   };
 };
 
-export default createTimer;
+export default createCountdown;
