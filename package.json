@@ -1,6 +1,6 @@
 {
   "name": "create-countdown",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Create a count down timer with a count down listener every second",
   "type": "module",
   "main": "index.js",
